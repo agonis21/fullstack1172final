@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Video</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="container mx-auto py-8">
+
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
+
+      <h1 class="text-3xl font-semibold mb-6 text-center">Upload Video</h1>
+
+      <form>
+        <!-- Video URL -->
+        <div class="mb-4">
+          <label for="videoURL" class="block text-gray-700 text-sm font-medium mb-2">Video URL:</label>
+          <input type="url" id="videoURL" name="videoURL" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+        </div>
+
+        <!-- Thumbnail Selection -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-medium mb-2">Thumbnail Selection:</label>
+          <div class="flex items-center">
+            <input type="radio" id="uploadThumbnail" name="thumbnailSelection" class="mr-2" checked>
+            <label for="uploadThumbnail" class="mr-6">Upload Thumbnail</label>
+
+            <input type="radio" id="urlThumbnail" name="thumbnailSelection" class="mr-2">
+            <label for="urlThumbnail">URL Thumbnail</label>
+          </div>
+        </div>
+
+        <!-- Upload Thumbnail -->
+        <div class="mb-4" id="uploadThumbnailSection">
+          <label for="thumbnailUpload" class="block text-gray-700 text-sm font-medium mb-2">Upload Thumbnail:</label>
+          <input type="file" id="thumbnailUpload" name="thumbnailUpload" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" accept="image/*">
+          <div id="thumbnailPreview" class="mt-2"></div>
+        </div>
+
+        <!-- URL Thumbnail -->
+        <div class="mb-4" id="urlThumbnailSection" style="display: none;">
+          <label for="thumbnailURL" class="block text-gray-700 text-sm font-medium mb-2">Thumbnail URL:</label>
+          <input type="url" id="thumbnailURL" name="thumbnailURL" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
+          <div id="urlThumbnailPreview" class="mt-2"></div>
+        </div>
+
+        <!-- Video Title -->
+        <div class="mb-4">
+          <label for="videoTitle" class="block text-gray-700 text-sm font-medium mb-2">Video Title:</label>
+          <input type="text" id="videoTitle" name="videoTitle" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+        </div>
+
+        <!-- Video Description -->
+        <div class="mb-4">
+          <label for="videoDescription" class="block text-gray-700 text-sm font-medium mb-2">Video Description:</label>
+          <textarea id="videoDescription" name="videoDescription" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" rows="4" required></textarea>
+        </div>
+
+        <!-- Video Tags -->
+        <div class="mb-4">
+          <label for="videoTags" class="block text-gray-700 text-sm font-medium mb-2">Video Tags (comma-separated):</label>
+          <input type="text" id="videoTags" name="videoTags" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+        </div>
+
+        <!-- Upload Button -->
+        <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Upload Video</button>
+      </form>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Script to toggle visibility of thumbnail sections and preview images based on user choice
+    const uploadThumbnailSection = document.getElementById('uploadThumbnailSection');
+    const urlThumbnailSection = document.getElementById('urlThumbnailSection');
+    const thumbnailUpload = document.getElementById('thumbnailUpload');
+    const thumbnailPreview = document.getElementById('thumbnailPreview');
+    const thumbnailURL = document.getElementById('thumbnailURL');
+    const urlThumbnailPreview = document.getElementById('urlThumbnailPreview');
+
+    document.querySelectorAll('input[name="thumbnailSelection"]').forEach((radio) => {
+      radio.addEventListener('change', (event) => {
+        if (event.target.id === 'uploadThumbnail') {
+          uploadThumbnailSection.style.display = 'block';
+          urlThumbnailSection.style.display = 'none';
+        } else if (event.target.id === 'urlThumbnail') {
+          uploadThumbnailSection.style.display = 'none';
+          urlThumbnailSection.style.display = 'block';
+        }
+      });
+    });
+
+    // Script to display image preview when user uploads a thumbnail
+    thumbnailUpload.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          thumbnailPreview.innerHTML = `<img src="${e.target.result}" alt="Thumbnail Preview" class="w-full h-20 object-cover rounded-md">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Script to display image preview when user provides a URL for the thumbnail
+    thumbnailURL.addEventListener('input', (event) => {
+      const url = event.target.value;
+      if (url) {
+        urlThumbnailPreview.innerHTML = `<img src="${url}" alt="Thumbnail Preview" class="w-full h-20 object-cover rounded-md">`;
+      }
+    });
+  </script>
+
+</body>
+</html>
