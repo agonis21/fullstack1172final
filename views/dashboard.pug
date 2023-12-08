@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title YouTube Videos
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css")
+
+    body
+        div.container.mx-auto.my-8
+            nav.font-sans.flex.flex-col.text-center.py-4.px-6.bg-white.shadow.w-full(class='sm:flex-row sm:text-left sm:justify-between sm:items-baseline')
+                .mb-2(class='sm:mb-0')
+                    a.font-bold.text-2xl.no-underline.text-grey-darkest(href='#' class='hover:text-blue-dark') FIFA 2022
+                div
+                    a.text-lg.no-underline.text-grey-darkest.ml-2(href='#' class='hover:text-blue-dark') 
+                        button.btn.btn-blue.rounded.bg-gray-500.text-white.font-bold.py-2.px-4(class='hover:bg-gray-700') Account
+                    a.text-lg.no-underline.text-grey-darkest.ml-2(href='new_video' class='hover:text-blue-dark')
+                        button.btn.btn-blue.rounded.bg-blue-500.text-white.font-bold.py-2.px-4(class='hover:bg-blue-700') Upload
+
+
+            .grid.grid-cols-1.gap-6(class='md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4')
+                each video in videos
+                    bg-white.p-4.rounded.shadow-md.overflow-hidden
+                        iframe(src=`https://www.youtube.com/embed/${video.url}`, frameborder="0", allowfullscreen=true, class="w-full h-48")
+                        p.text-gray-700.font-normal.mt-2 Uploaded by 
+                            b !{video.uploader}
+                            |  at 
+                            i !{video.date}

@@ -11,9 +11,19 @@ app.use(express.urlencoded({ extended: true }));
 
 const apiRoutes = require('./routes/apiRoutes'); 
 const authRoutes = require('./routes/authRoutes'); 
+const videoRoutes = require('./routes/videoRoutes'); 
 
 app.use('/api', apiRoutes); // Use the API subrouter
 app.use('/auth', authRoutes); // Use the auth subrouter
+app.use('/video', videoRoutes); // Use the auth subrouter
+
+
+
+
+
+
+app.set('view engine', 'pug');
+
 
 
 // Serve static files from the "public" folder
@@ -33,9 +43,9 @@ app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.get('/video/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'feed.html'));
-})
+// app.get('/video/dashboard', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+// })
 
 // Handle 404 errors
 app.use((req, res, next) => {

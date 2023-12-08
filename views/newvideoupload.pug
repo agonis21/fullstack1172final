@@ -1,0 +1,20 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Upload Video
+  link(href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet')
+.container.mx-auto.py-8
+  .max-w-md.mx-auto.bg-white.p-8.rounded.shadow-md
+    h1.text-3xl.font-semibold.mb-6.text-center Upload Video
+    form(method='POST')
+      // Video URL
+      .mb-4
+        label.block.text-gray-700.text-sm.font-medium.mb-2(for='videoURL') YouTube Video URL:
+        input#videoURL.w-full.px-4.py-2.border.rounded-md(type='url' name='videoURL' class='focus:outline-none focus:ring focus:border-blue-300' required='')
+      // Video Title
+      .mb-4
+        label.block.text-gray-700.text-sm.font-medium.mb-2(for='videoTitle') Video Title:
+        input#videoTitle.w-full.px-4.py-2.border.rounded-md(type='text' name='videoTitle' class='focus:outline-none focus:ring focus:border-blue-300' required='')
+      // Upload Button
+      button.w-full.bg-blue-500.text-white.px-4.py-2.rounded-md(type='submit' class='hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300') Upload Video
