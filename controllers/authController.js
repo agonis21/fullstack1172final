@@ -54,7 +54,17 @@ exports.postLogin = async (req, res) => {
     const userExist = await User.exists({userhandle});
 
     if (userExist) {
+        const user = await User.findOne({
+            userhandle: userhandle
+        });
 
+        if (password == user.userpassword) {
+            res.sendFile(path.join(__dirname, "..", 'public', 'redirect-dashboard.html'));
+        } else {
+            res.sendFile(path.join(__dirname, "..", 'public', 'wrongpassword.html'));
+        }
+
+        
     } else {
         res.sendFile(path.join(__dirname, "..", 'public', 'userdoesnotexist.html'));
     }

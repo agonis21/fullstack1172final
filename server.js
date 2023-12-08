@@ -33,6 +33,9 @@ app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
+app.get('/feed', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'feed.html'));
+})
 
 // Handle 404 errors
 app.use((req, res, next) => {
