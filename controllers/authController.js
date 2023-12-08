@@ -1,5 +1,8 @@
 const path = require("path");
 const mongoose = require('mongoose');
+const User = require('../models/userModel');
+
+
 
 const uri = 'mongodb+srv://ahsem:GMcunning32@cluster0.f3k2hxd.mongodb.net/?retryWrites=true&w=majority';
 
@@ -8,7 +11,7 @@ mongoose.connect(uri);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+  console.log('authController.js: Connected to MongoDB');
 });
 
 
@@ -25,7 +28,6 @@ exports.postRegister = async (req, res) => {
     var userhandle = req.body.userhandle;
     var userpassword = req.body.password;
 
-    const User = require('../models/userModel');
     const newUser = new User({
         fullname: fullname, 
         userhandle: userhandle,
@@ -43,8 +45,19 @@ exports.getLogin = (req, res) => {
     res.sendFile(path.join(__dirname, "..", 'public', 'signin.html'));
 };
 
-exports.postLogin = (req, res) => {
-    res.sendFile(path.join(__dirname, "..", 'public', 'signin.html'));
+exports.postLogin = async (req, res) => {
+    console.log("POST auth/login/");
+
+    var userhandle = req.body.userhandle;
+    var password = req.body.password;
+
+    const userExist = await User.exists({userhandle});
+
+    if (userExist) {
+
+    } else {
+        res.sendFile(path.join(__dirname, "..", 'public', 'userdoesnotexist.html'));
+    }
 };
 
 
