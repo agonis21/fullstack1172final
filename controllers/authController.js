@@ -39,6 +39,7 @@ exports.postRegister = async (req, res) => {
 };
 
 exports.getLogin = (req, res) => {
+    console.log("GET auth/login/");
     res.sendFile(path.join(__dirname, "..", 'public', 'signin.html'));
 };
 
