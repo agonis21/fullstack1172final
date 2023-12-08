@@ -33,7 +33,7 @@ app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.get('/feed', (req, res) => {
+app.get('/video/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'feed.html'));
 })
 
