@@ -5,11 +5,15 @@ const path = require('path');
 // Create an Express application
 const app = express();
 
-// API subroute
-const apiRoutes = require('./routes/apiRoutes'); 
 
-// Mount the API subroute under '/api'
+app.use(express.urlencoded({ extended: true }));
+
+
+const apiRoutes = require('./routes/apiRoutes'); 
+const authRoutes = require('./routes/authRoutes'); 
+
 app.use('/api', apiRoutes); // Use the API subrouter
+app.use('/auth', authRoutes); // Use the auth subrouter
 
 
 // Serve static files from the "public" folder

@@ -1,10 +1,11 @@
-// models/userModel.js
 const mongoose = require('../db');
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  // Add more fields as needed
+  fullname: String,
+  userhandle: String,
+  userpassword: String
+}, {
+  timestamps: true
 });
 
 const User = mongoose.model('User', userSchema);
