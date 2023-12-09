@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Account Dashboard
+    // Include Tailwind CSS
+    link(href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css', rel='stylesheet')
+  body.bg-gray-100.min-h-screen.flex.items-center.justify-center
+    .bg-white.p-8.rounded.shadow-md.w-96
+      h1.text-2xl.font-bold.mb-4 Account Dashboard
+      // User Information
+      .mb-4
+        label.text-sm.text-gray-600 User Full Name:
+        p.font-semibold=fullname
+      .mb-4
+        label.text-sm.text-gray-600 User Handle:
+        p.font-semibold=userhandle
+      .mb-4
+        label.text-sm.text-gray-600 User Password:
+        p.font-semibold=userpassword
+      .mb-4
+        label.text-sm.text-gray-600 Join Date:
+        p.font-semibold=createdAt
+      // Logout Button
+      form(method='POST')
+        button.w-full.bg-blue-500.text-white.px-4.py-2.rounded-md(type='submit' class='hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300') Logout

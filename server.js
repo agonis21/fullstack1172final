@@ -1,12 +1,14 @@
 // Import required modules
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // Create an Express application
 const app = express();
 
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 
 const apiRoutes = require('./routes/apiRoutes'); 

@@ -1,10 +1,12 @@
+const User = require('../models/userModel');
 const Video = require('../models/videoModel');
 
 exports.getDashboard = async (req, res) => {
     console.log("GET video/dashboard");
 
     const db_videos = await Video.find();
-    console.log(db_videos);
+    
+    console.log(req.cookies);
 
     
     const videos = [
@@ -51,11 +53,32 @@ exports.postUploadVideo = async (req, res) => {
     const newVideo = new Video({
         videotitle: req.body.videoTitle,
         videolink: getYouTubeVideoIdFromUrl(req.body.videoURL),
-        videouploader: "unknown"
+        videouploader: req.cookies.userhandle
     });
 
     const savedVideo = await newVideo.save();
     console.log("Video is saved.");
 
     res.redirect("dashboard");
+}
+
+
+exports.getAccountInfo = async (req, res) => {
+    const user = await User.findOne({
+        userhandle: req.cookies.userhandle
+    });
+    
+    //console.log(user);
+    res.render("accountinfo", {
+        fullname: user.fullname,
+        userhandle: user.userhandle,
+        userpassword: user.userpassword,
+        createdAt: user.createdAt
+    });
+}
+
+exports.getLogoutRequest = async (req, res) => {
+    res.cookie('userhandle', 'none', { maxAge: 86400000, httpOnly: true });
+
+    res.redirect("../..");
 }

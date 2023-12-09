@@ -59,6 +59,9 @@ exports.postLogin = async (req, res) => {
         });
 
         if (password == user.userpassword) {
+            // SUCCESS !
+            res.cookie('userhandle', userhandle, { maxAge: 86400000, httpOnly: true });
+
             res.sendFile(path.join(__dirname, "..", 'public', 'redirect-dashboard.html'));
         } else {
             res.sendFile(path.join(__dirname, "..", 'public', 'wrongpassword.html'));

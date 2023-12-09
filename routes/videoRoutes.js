@@ -16,5 +16,8 @@ router.get('/dashboard', videoController.getDashboard);
 router.get('/new_video', videoController.getUploadVideo);
 router.post('/new_video', videoController.postUploadVideo);
 
+router.get('/account', videoController.getAccountInfo);
+router.post('/account', videoController.getLogoutRequest);
+
 
 module.exports = router;
